@@ -50,18 +50,17 @@ def Train():
         x1, x2, y = random.choice(Tarin_data)  # x1 表示坐标 第一位  x2表示第二位 y 表示标签值
         print(x1, x2, y)
         y_predict = sin(weight[0] * x1 + weight[1] * x2)
-        print("训练数据 :  x:(%d,%d) y:%d\t==>\t y_predict:\t%d" % (x1, x2, y, y_predict))
+        print("训练数据 :\tx:(%d,%d) y:%d\t==>\t y_predict:\t%d" % (x1, x2, y, y_predict))
         if y * y_predict <= 0:      #判断 y真实值 与 预测值是否相同
             weight[0] = weight[0] + learning_rate * y * x1
             weight[1] = weight[1] + learning_rate * y * x2
 
             bias = bias + learning_rate * y
-            print("更新\t权重\t和\t偏差:")
-            print( weight[0] + weight[1] +bias)
-        print("停止更新")
-        print(weight[0], weight[1], bias)
+    print("更新\t权重\t和\t偏差:")
+    print("停止更新")
+    print(weight[0], weight[1], bias)
         # weight.append(round(num,3))    #随机权重 保留三位小数
-        pass
+    pass
     return weight, bias
 
 
@@ -84,32 +83,21 @@ def date_input():  # 数据输入
 
 
 def draw():
-    if(len(Tarin_data)==8):
-        plt.plot(np.array(Tarin_data)[0:3, 0], np.array(Tarin_data)[0:3, 1], 'ro')
-        plt.plot(np.array(Tarin_data)[4:, 0], np.array(Tarin_data)[4:, 1], 'bo')
-        x_1 = []
-        x_2 = []
-        for i in range(-10, 10):
-            x_1.append(i)
-            x_2.append((-weight[0] * i - bias) / weight[1])
-        plt.plot(x_1, x_2)
-        plt.show()
-    else:
-        lenth=len(Tarin_data)
-        count=0
-        for i in Tarin_data:
-            if (i[2] == -1):
-                count += 1
-                pass
-        plt.plot(np.array(Tarin_data)[0:lenth-count-1, 0], np.array(Tarin_data)[0:lenth-count-1, 1], 'ro')
-        plt.plot(np.array(Tarin_data)[lenth-count:, 0], np.array(Tarin_data)[lenth-count:, 1], 'bo')
-        x_1 = []
-        x_2 = []
-        for i in range(-10, 10):
-            x_1.append(i)
-            x_2.append((-weight[0] * i - bias) / weight[1])
-        plt.plot(x_1, x_2)
-        plt.show()
+    lenth = len(Tarin_data)
+    count = 0
+    for i in Tarin_data:
+        if (i[2] == -1):
+            count += 1
+            pass
+    plt.plot(np.array(Tarin_data)[0:lenth - count - 1, 0], np.array(Tarin_data)[0:lenth - count - 1, 1], 'ro')
+    plt.plot(np.array(Tarin_data)[lenth - count:, 0], np.array(Tarin_data)[lenth - count:, 1], 'bo')
+    x_1 = []
+    x_2 = []
+    for i in range(-10, 10):
+        x_1.append(i)
+        x_2.append((-weight[0] * i - bias) / weight[1])
+    plt.plot(x_1, x_2)
+    plt.show()
 
 
 def check_point(data):
